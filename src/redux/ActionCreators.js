@@ -68,3 +68,34 @@ export const fetchDepart = () => (dispatch) => {
         .then(depart => dispatch(addDepart(depart)))
         .catch(error => dispatch(failedDepart(error)));
 }
+
+// Salary
+export const addSalary = (salary) => ({
+    type: ActionTypes.ADD_SALARY,
+    payload: salary
+});
+
+export const failedSalary = (errmess) => ({
+    type: ActionTypes.FAILED_SALARY,
+    payload: errmess
+});
+
+export const fetchSalary = () => (dispatch) => {
+    return fetch(baseUrl + "staffsSalary")
+        .then(response => {
+            if (response.ok) {
+                return response;
+            } else {
+                var error = new Error("Error" + response.status + ": " + response.statusText);
+                error.response = response;
+                throw error;
+            }
+        },
+        error => {
+            var errmess = new Error(error.message);
+            throw errmess;
+        })
+        .then(response => response.json())
+        .then(salary => dispatch(addSalary(salary)))
+        .catch(error => dispatch(failedSalary(error)));
+}
