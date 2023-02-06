@@ -5,6 +5,7 @@ import Footer from './FooterComponent';
 import Department from './DepartmentComponent';
 import Salary from './SalaryComponent';
 import StaffDetail from './StaffdetailComponent';
+import DepartDetail from './DepartmentdetailComponent';
 import { Switch, Redirect, Route, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchStaffs, fetchDepart, fetchSalary } from '../redux/ActionCreators';
@@ -42,6 +43,13 @@ class Main extends Component {
       );
     };
 
+    const StaffWithDepart = ({match}) => {
+      return(
+        <DepartDetail staff={this.props.staffs.staffs.filter((staff) => staff.departmentId === match.params.departId)}
+          departname={this.props.depart.depart.filter((depart) => depart.id === match.params.departId)[0]} />
+      );
+    };
+
     return (
       <div>
         <Header />
@@ -50,7 +58,7 @@ class Main extends Component {
           <Route exact path="/department" component={() => <Department depart={this.props.depart} />} />
           <Route exact path="/salary" component={() => <Salary salary={this.props.salary} />} />
           <Route path="/staff/:staffId" component={StaffWithId} />
-          <Route path="/department/:departId" />
+          <Route path="/department/:departId" component={StaffWithDepart} />
           <Redirect to="/staff" />
         </Switch>
         <Footer />
