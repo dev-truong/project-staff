@@ -37,3 +37,34 @@ export const fetchStaffs = () => (dispatch) => {
         .then(staff => dispatch(listStaff(staff)))
         .catch(error => dispatch(failedStaff(error)));
 }
+
+// Department
+export const addDepart = (depart) => ({
+    type: ActionTypes.ADD_DEPART,
+    payload: depart
+});
+
+export const failedDepart = (errmess) => ({
+    type: ActionTypes.FAILED_DEPART,
+    payload: errmess
+});
+
+export const fetchDepart = () => (dispatch) => {
+    return fetch(baseUrl + "departments")
+        .then(response => {
+            if (response.ok) {
+                return response;
+            } else {
+                var error = new Error("Error" + response.status + ": " + response.statusText);
+                error.response = response;
+                throw error;
+            }
+        },
+        error => {
+            var errmess = new Error(error.message);
+            throw errmess;
+        })
+        .then(response => response.json())
+        .then(depart => dispatch(addDepart(depart)))
+        .catch(error => dispatch(failedDepart(error)));
+}
