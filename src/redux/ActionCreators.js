@@ -99,3 +99,39 @@ export const fetchSalary = () => (dispatch) => {
         .then(salary => dispatch(addSalary(salary)))
         .catch(error => dispatch(failedSalary(error)));
 }
+
+// ADD NEWSTAFF
+export const addNewStaff = (newstaff) => ({
+    type: ActionTypes.ADD_NEWSTAFF,
+    payload: newstaff
+});
+
+export const postStaff = (newStaff) => (dispatch) => {
+    
+    return fetch(baseUrl + "staffs", {
+        method: "POST",
+        body: JSON.stringify(newStaff),
+        headers: {
+            "Content-Type": "application/json"
+        },
+        credentials: "same-origin"
+    })
+    .then (response => {
+        if (response.ok) {
+            return response;
+        } else {
+            var error = new Error("Error " + response.status + ":" + response.statusText);
+            error.response = response;
+            throw error;
+        }
+    },
+    error => {
+        throw error;
+    })
+    .then(response => response.json())
+    .then(response => dispatch(addNewStaff(response)))
+    .catch(error => { 
+        console.log('post newstaff', error.message);
+        alert('Your newstaff could not be posted\nError: ' + error.message);
+    });
+};

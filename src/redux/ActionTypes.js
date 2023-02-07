@@ -5,3 +5,4 @@ export const ADD_DEPART = "ADD_DEPART";
 export const FAILED_DEPART = "FAILED_DEPART";
 export const ADD_SALARY = "ADD_SALARY";
 export const FAILED_SALARY = "FAILED_SALARY";
+export const ADD_NEWSTAFF = "ADD_NEWSTAFF";

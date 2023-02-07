@@ -12,6 +12,8 @@ export const Staffs = (state = {
             return {...state, errMess: action.payload, isLoading: false, staffs: []};
         case ActionTypes.LOADING_STAFF:
             return {...state, errMess: null, isLoading: true, staffs: [] };
+        case ActionTypes.ADD_NEWSTAFF:
+            return {...state, isLoading: false, staffs: action.payload};
         default:
             return state;
     }
