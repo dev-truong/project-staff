@@ -91,11 +91,11 @@ const Staff = (props) => {
         return(
             <div className="container">
                 <div className="row m-1">
-                    <div className="col-2">
+                    <div className="col-4 col-md-3 col-lg-3">
                         <h3>Nhân Viên</h3>
                     </div>
-                    <div className="col-5">
-                        <Button onClick={toggleModal}><span className="fa fa-plus"></span></Button>
+                    <div className="col-2 col-md-1" align="left">
+                        <Button color="primary" onClick={toggleModal}><span className="fa fa-plus"></span></Button>
                     </div>
                     <Modal isOpen={isModalOpen} toggle={toggleModal}>
                         <ModalHeader toggle={toggleModal}>Thêm Nhân Viên</ModalHeader>
@@ -215,17 +215,18 @@ const Staff = (props) => {
                             </LocalForm>
                         </ModalBody>
                     </Modal>
-                    <div className="col-4">
+                    <div className="col-6 col-md-8">
                         <Form onSubmit={handleSearch}>
                             <Row>
-                                <Col md={11}>
+                                <Col sm={1} lg={4}></Col>
+                                <Col xs={8} sm={9} lg={6}>
                                     <FormGroup>
                                         <Input type="text" id="search" name="search"
                                             innerRef={inputref}
                                         />
                                     </FormGroup>
                                 </Col>
-                                <Col md={1}>
+                                <Col xs={2} sm={1} lg={2}>
                                     <Button type="submit" color="primary">Tìm</Button>
                                 </Col>
                             </Row>
