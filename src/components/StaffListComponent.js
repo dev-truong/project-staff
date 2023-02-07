@@ -6,13 +6,14 @@ import { Loading } from "./LoadingComponent";
 import { Fade } from 'react-animation-components';
 import { Control, LocalForm, Errors } from "react-redux-form";
 
-function RenderStaff({ staff }) {
+function RenderStaff({ staff, deleteStaff }) {
     return(
         <Card>
             <Link to={`/staff/${staff.id}`} style={{ textDecoration: "none", color: "black"}} className="text-center">
                 <CardImg width="100%" src={staff.image} alt={staff.name}></CardImg>
                 <CardTitle>{staff.name}</CardTitle>
             </Link>
+            <Button size="sm" onClick={() => deleteStaff(staff.id)} color="danger"><span>Delete</span></Button>
         </Card>
     );
 }
@@ -240,7 +241,7 @@ const Staff = (props) => {
                             <div className="col-6 col-sm-4 col-md-2 p-1">
                                 <Fade in>
                                     <div key={staff.id}>
-                                        <RenderStaff staff={staff} />
+                                        <RenderStaff staff={staff} deleteStaff={props.deleteStaff} />
                                     </div>
                                 </Fade>
                             </div>

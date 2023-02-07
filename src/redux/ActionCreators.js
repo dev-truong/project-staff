@@ -135,3 +135,33 @@ export const postStaff = (newStaff) => (dispatch) => {
         alert('Your newstaff could not be posted\nError: ' + error.message);
     });
 };
+
+// DELETE STAFF
+export const staffDelete = (staffdelete) => ({
+    type: ActionTypes.DELETE_STAFF,
+    payload: staffdelete
+})
+
+export const deleteStaff = (deleteid) => (dispatch) => {
+    return fetch(baseUrl + `staffs/${deleteid}`,{
+        method: "DELETE",
+    })
+    .then(response => {
+        if (response.ok) {
+            return response;
+        } else {
+            var error = new Error("Error" + response.status + ": " + response.statusText);
+            error.response = response;
+            throw error;
+        }
+    },
+    error => {
+        throw error;
+    })
+    .then(response => response.json())
+    .then(response => dispatch(staffDelete(response)))
+    .catch(error => {
+        console.log("delete: " + error.message);
+        alert("Your staff could not be delete\nError: " + error.message);
+    });
+}

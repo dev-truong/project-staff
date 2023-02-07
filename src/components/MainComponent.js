@@ -8,7 +8,7 @@ import StaffDetail from './StaffdetailComponent';
 import DepartDetail from './DepartmentdetailComponent';
 import { Switch, Redirect, Route, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchStaffs, fetchDepart, fetchSalary, postStaff } from '../redux/ActionCreators';
+import { fetchStaffs, fetchDepart, fetchSalary, postStaff, deleteStaff } from '../redux/ActionCreators';
 
 const mapStateToProps = state => {
   return {
@@ -23,6 +23,7 @@ const mapDispatchToProps = (dispatch) => ({
   fetchDepart: () => {dispatch(fetchDepart())},
   fetchSalary: () => {dispatch(fetchSalary())},
   postStaff: (newstaff) => {dispatch(postStaff(newstaff))},
+  deleteStaff: (deleteid) => {dispatch(deleteStaff(deleteid))}
 })
 
 class Main extends Component {
@@ -57,7 +58,8 @@ class Main extends Component {
         <Switch>
           <Route exact path="/staff" component={() => <Staff staffs={this.props.staffs} 
             postStaff={this.props.postStaff}
-            />} />
+            deleteStaff={this.props.deleteStaff} />} 
+             />
           <Route exact path="/department" component={() => <Department depart={this.props.depart} />} />
           <Route exact path="/salary" component={() => <Salary salary={this.props.salary} />} />
           <Route path="/staff/:staffId" component={StaffWithId} />
