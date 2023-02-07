@@ -1,5 +1,5 @@
-import React from "react";
-import { Card, CardTitle, CardText, CardBody, Breadcrumb, BreadcrumbItem } from "reactstrap";
+import React, { useState } from "react";
+import { Card, CardTitle, CardText, CardBody, Breadcrumb, BreadcrumbItem, Button } from "reactstrap";
 import { Link } from "react-router-dom";
 import { FadeTransform } from "react-animation-components";
 
@@ -23,8 +23,25 @@ function RenderSalary({salary}) {
 
 
 const Salary = (props) => {
+// Sort Salary
+    const [sortSalary, setSortSalary] = useState(props.salary.salary);
+    
+    const increase = () => {
+        const x = sortSalary.sort((a,b) => {
+            return (a.salary - b.salary);
+        });
+        setSortSalary(JSON.parse(JSON.stringify(x)));
+    };
+    
+    const decrease = () => {
+        const y = sortSalary.sort((a,b) => {
+            return (b.salary - a.salary);
+        });
+        setSortSalary(JSON.parse(JSON.stringify(y)));
+    };
 
-    const salary = props.salary.salary.map((salary) => {
+// Display Salary Table
+    const salary = sortSalary.map((salary) => {
         return(
             <RenderSalary salary={salary} />
         );
@@ -47,6 +64,14 @@ const Salary = (props) => {
                         <BreadcrumbItem><Link to="/staff">Nhân Viên</Link></BreadcrumbItem>
                         <BreadcrumbItem active>Bảng Lương</BreadcrumbItem>
                     </Breadcrumb>
+                </div>
+                <div className="row">
+                    <div className="col-2 col-lg-1 mr-1">
+                        <Button color="primary" onClick={increase}>Lương <i class="fa fa-long-arrow-up"></i></Button>
+                    </div>
+                    <div className="col-2 col-lg-1">
+                        <Button color="primary" onClick={decrease}>Lương <i class="fa fa-long-arrow-down"></i></Button>
+                    </div>
                 </div>
                 <div className="row">
                     {salary}
