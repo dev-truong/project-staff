@@ -8,7 +8,7 @@ import StaffDetail from './StaffdetailComponent';
 import DepartDetail from './DepartmentdetailComponent';
 import { Switch, Redirect, Route, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchStaffs, fetchDepart, fetchSalary, postStaff, deleteStaff } from '../redux/ActionCreators';
+import { fetchStaffs, fetchDepart, fetchSalary, postStaff, deleteStaff, patchStaff } from '../redux/ActionCreators';
 
 const mapStateToProps = state => {
   return {
@@ -23,7 +23,8 @@ const mapDispatchToProps = (dispatch) => ({
   fetchDepart: () => {dispatch(fetchDepart())},
   fetchSalary: () => {dispatch(fetchSalary())},
   postStaff: (newstaff) => {dispatch(postStaff(newstaff))},
-  deleteStaff: (deleteid) => {dispatch(deleteStaff(deleteid))}
+  deleteStaff: (deleteid) => {dispatch(deleteStaff(deleteid))},
+  patchStaff: (updatestaff) => {dispatch(patchStaff(updatestaff))}
 })
 
 class Main extends Component {
@@ -41,7 +42,8 @@ class Main extends Component {
       return(
         <StaffDetail staff={this.props.staffs.staffs.filter((staff) => staff.id === parseInt(match.params.staffId,10))[0]}
           depart={this.props.depart}
-          />
+          patchStaff={this.props.patchStaff} 
+           />
       );
     };
 

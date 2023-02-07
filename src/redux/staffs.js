@@ -16,6 +16,8 @@ export const Staffs = (state = {
             return {...state, isLoading: false, staffs: action.payload};
         case ActionTypes.DELETE_STAFF:
             return {...state, staffs: action.payload};
+        case ActionTypes.UPDATE_STAFF:
+        return {...state, staffs: action.payload};
         default:
             return state;
     }

@@ -165,3 +165,38 @@ export const deleteStaff = (deleteid) => (dispatch) => {
         alert("Your staff could not be delete\nError: " + error.message);
     });
 }
+
+// UPDATE STAFF
+export const updateStaff = (updatestaff) => ({
+    type: ActionTypes.UPDATE_STAFF,
+    payload: updatestaff
+});
+
+export const patchStaff = (updatestaff) => (dispatch) => {
+    return fetch (baseUrl + "staffs", {
+        method: "PATCH",
+        body: JSON.stringify(updatestaff),
+        headers: {
+            "Content-Type": "application/json"
+        },
+        credentials: "same-origin"
+    })
+    .then (response => {
+        if (response.ok) {
+            return response;
+        } else {
+            var error = new Error("Error " + response.status + ":" + response.statusText);
+            error.response = response;
+            throw error;
+        }
+    },
+    error => {
+        throw error;
+    })
+    .then(response => response.json())
+    .then(response => dispatch(updateStaff(response)))
+    .catch(error => {
+        console.log("patch: " + error.message);
+        alert("Your staff could not be update\nError: " + error.message);
+    });
+};
