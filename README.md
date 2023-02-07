@@ -11,6 +11,6 @@
 |-----:|-----------|
 |     1| HTML/CSS|
 |     2| JavaScript|
-|     1| React|
-|     1| Redux|
-|     1| Redux Thunk|
+|     3| React|
+|     4| Redux|
+|     5| Redux Thunk|
